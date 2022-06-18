@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.9.xsd">
+
+    <changeSet id="create_shoes_image_table" author="Pavlo Manuilenko">
+        <preConditions>
+            <not>
+                <tableExists tableName="shoes_image"/>
+            </not>
+            <tableExists tableName="product_image"/>
+            <tableExists tableName="shoes"/>
+        </preConditions>
+        <createTable tableName="shoes_image">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="shoes_image_id_pk"/>
+            </column>
+            <column name="shoes_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="shoes_image" baseColumnNames="id"
+                                 constraintName="product_image_id_fk"
+                                 referencedTableName="product_image"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="shoes_image" baseColumnNames="shoes_id"
+                                 constraintName="shoes_id_fk"
+                                 referencedTableName="shoes"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

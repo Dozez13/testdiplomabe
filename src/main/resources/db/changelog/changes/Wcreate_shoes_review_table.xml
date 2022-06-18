@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.9.xsd">
+
+    <changeSet id="create_shoes_review_table" author="Pavlo Manuilenko">
+        <preConditions>
+            <not>
+                <tableExists tableName="shoes_review"/>
+            </not>
+            <tableExists tableName="review"/>
+        </preConditions>
+        <createTable tableName="shoes_review">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="shoes_review_id_pk"/>
+            </column>
+            <column name="author_id" type="bigint"/>
+            <column name="shoes_model_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="shoes_review" baseColumnNames="id"
+                                 constraintName="shoes_review_id_fk"
+                                 referencedTableName="review"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="shoes_review" baseColumnNames="author_id"
+                                 constraintName="shoes_review_user_id_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="shoes_review" baseColumnNames="shoes_model_id"
+                                 constraintName="shoes_review_shoes_model_id_fk"
+                                 referencedTableName="shoes_model"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

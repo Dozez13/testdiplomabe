@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.9.xsd">
+
+    <changeSet id="create_admin_table" author="Pavlo Manuilenko">
+        <preConditions>
+            <not>
+                <tableExists tableName="admin"/>
+            </not>
+            <tableExists tableName="user"/>
+            <columnExists tableName="user" columnName="id"/>
+        </preConditions>
+        <createTable tableName="admin">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="admin_id_pk"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="admin" baseColumnNames="id" constraintName="admin_user_id_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

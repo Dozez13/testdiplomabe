@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.9.xsd">
+
+    <changeSet id="create_shoes_size" author="Pavlo Manuilenko">
+        <preConditions>
+            <not>
+                <tableExists tableName="shoes_size"/>
+            </not>
+            <tableExists tableName="product_size"/>
+        </preConditions>
+        <createTable tableName="shoes_size">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="shoes_size_id_pk"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="shoes_size" baseColumnNames="id"
+                                 constraintName="shoes_size_id_fk"
+                                 referencedTableName="product_size"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

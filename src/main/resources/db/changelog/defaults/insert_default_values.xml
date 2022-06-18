@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.9.xsd">
+
+    <changeSet id="insert_product_model_category_table" author="Pavlo Manuilenko">
+        <insert tableName="product_model_category">
+            <column name="model_category" value="SHOES"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\Shoes.png"/>
+        </insert>
+    </changeSet>
+    <changeSet id="insert_shoes_model_category_table" author="Pavlo Manuilenko">
+        <insert tableName="shoes_model_category">
+            <column name="id"
+                    valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+    </changeSet>
+    <changeSet id="insert_product_model_type_table" author="Pavlo Manuilenko">
+        <insert tableName="product_model_type">
+            <column name="model_type" value="ALL_SHOES"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\All Shoes.png"/>
+        </insert>
+        <insert tableName="product_model_type">
+            <column name="model_type" value="BOOTS"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\Boots\Boots.png"/>
+        </insert>
+        <insert tableName="product_model_type">
+            <column name="model_type" value="FLATS"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\Flats\Flats.png"/>
+        </insert>
+        <insert tableName="product_model_type">
+            <column name="model_type" value="SANDALS"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\Sandals\Sandals.png"/>
+        </insert>
+        <insert tableName="product_model_type">
+            <column name="model_type" value="SLIPPERS"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\Slippers\Slippers.png"/>
+        </insert>
+        <insert tableName="product_model_type">
+            <column name="model_type" value="SNEAKERS"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\Sneakers\Sneakers.png"/>
+        </insert>
+        <insert tableName="product_model_type">
+            <column name="model_type" value="WEDGES"/>
+            <column name="path_to_file" value="D:\projectDate\Shoes\Wedges\Wedges.png"/>
+        </insert>
+    </changeSet>
+    <changeSet id="insert_shoes_model_type_table" author="Pavlo Manuilenko">
+        <insert tableName="shoes_model_type">
+            <column name="id"
+                    valueComputed="(SELECT pmt.id FROM product_model_type pmt WHERE pmt.model_type='ALL_SHOES')"/>
+            <column name="shoes_model_category_id" valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+        <insert tableName="shoes_model_type">
+            <column name="id"
+                    valueComputed="(SELECT pmt.id FROM product_model_type pmt WHERE pmt.model_type='BOOTS')"/>
+            <column name="shoes_model_category_id" valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+        <insert tableName="shoes_model_type">
+            <column name="id"
+                    valueComputed="(SELECT pmt.id FROM product_model_type pmt WHERE pmt.model_type='FLATS')"/>
+            <column name="shoes_model_category_id" valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+        <insert tableName="shoes_model_type">
+            <column name="id"
+                    valueComputed="(SELECT pmt.id FROM product_model_type pmt WHERE pmt.model_type='SANDALS')"/>
+            <column name="shoes_model_category_id" valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+        <insert tableName="shoes_model_type">
+            <column name="id"
+                    valueComputed="(SELECT pmt.id FROM product_model_type pmt WHERE pmt.model_type='SLIPPERS')"/>
+            <column name="shoes_model_category_id" valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+        <insert tableName="shoes_model_type">
+            <column name="id"
+                    valueComputed="(SELECT pmt.id FROM product_model_type pmt WHERE pmt.model_type='SNEAKERS')"/>
+            <column name="shoes_model_category_id" valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+        <insert tableName="shoes_model_type">
+            <column name="id"
+                    valueComputed="(SELECT pmt.id FROM product_model_type pmt WHERE pmt.model_type='WEDGES')"/>
+            <column name="shoes_model_category_id" valueComputed="(SELECT pmc.id FROM product_model_category pmc WHERE pmc.model_category='SHOES')"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
